@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Vote To Survive Studio · Sign-in</title>
+<style>
+  body { margin:0; background:#0b0f1a; color:#e8ecf4; font:16px/1.6 system-ui, sans-serif; }
+  main { max-width:560px; margin:0 auto; padding:48px 16px; }
+  p { color:#9aa4b8; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Finishing sign-in…</h1>
+  <p id="msg">Sending the result to the Vote To Survive Studio app running on this computer.</p>
+</main>
+<script>
+  // Repassa o resultado do login (code/state ou erro) apenas para o app local
+  // nesta mesma máquina. Nada é enviado a nenhum servidor nem guardado aqui.
+  (function () {
+    var q = window.location.search || "";
+    var h = window.location.hash ? window.location.hash.replace(/^#/, "") : "";
+    var params = q ? q.replace(/^\?/, "") : h;
+    if (!params) {
+      document.getElementById("msg").textContent = "No sign-in data found. You can close this tab.";
+      return;
+    }
+    window.location.replace("http://127.0.0.1:8765/tiktok/callback?" + params);
+  })();
+</script>
+</body>
+</html>
